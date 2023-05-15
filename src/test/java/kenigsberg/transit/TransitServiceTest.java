@@ -6,14 +6,12 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TransitServiceTest {
     @Test
     public void getTransitInfo() {
         // given
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://bustime.mta.info//")
+                .baseUrl("https://bustime.mta.info/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
@@ -26,10 +24,8 @@ class TransitServiceTest {
 
         // then
         Assertions.assertNotNull(stopMonitor);
-        Assertions.assertNotNull(stopMonitor.ServiceDelivery.StopMonitoringDeliveries[0].MonitoredStopVisits[0].MonitoredVehicleJourney.DestinationName);
-        //Below test will fail when weather is cold
-        //Assertions.assertTrue(currentWeather.main.temp > 0);
-        //Assertions.assertEquals("Staten Island", currentWeather.name);
+        Assertions.assertNotNull(stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.DestinationName);
+        Assertions.assertEquals("S GANNON AV/BRADLEY AV", stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.StopPointName);
     }
 
 
