@@ -1,6 +1,5 @@
 package kenigsberg.transit;
 
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -21,8 +20,7 @@ public class TransitFrame extends JFrame {
     private TransitService service = retrofit.create(TransitService.class);
 
     private JLabel limitedInfoLabel;
-    private JLabel stopName;
-    private JLabel expectedArrivalTime;
+    private JLabel completeStopInfo;
     private TransitController controller;
     public TransitFrame() {
 
@@ -60,13 +58,10 @@ public class TransitFrame extends JFrame {
         limitedInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 
-        stopName = new JLabel();
-        detailStopPanel.add(stopName);
+        completeStopInfo = new JLabel();
+        detailStopPanel.add(completeStopInfo);
 
-        expectedArrivalTime = new JLabel();
-        detailStopPanel.add(expectedArrivalTime);
-
-        controller = new TransitController(service, limitedInfoLabel, stopName, expectedArrivalTime);
+        controller = new TransitController(service, limitedInfoLabel, completeStopInfo);
 
         stopPanel.add(detailStopPanel, BorderLayout.SOUTH);
         mainPanel.add(stopPanel, BorderLayout.CENTER);
