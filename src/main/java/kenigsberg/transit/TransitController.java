@@ -10,7 +10,8 @@ public class TransitController {
     private JLabel stopName;
     private JLabel expectedArrivalTime;
 
-    public TransitController(TransitService service, JLabel limitedInfo, JLabel stopName, JLabel expectedArrivalTime) {
+    public TransitController(TransitService service, JLabel limitedInfo,
+                             JLabel stopName, JLabel expectedArrivalTime) {
         this.service = service;
         this.limitedInfo = limitedInfo;
         this.stopName = stopName;
@@ -23,7 +24,8 @@ public class TransitController {
                 .observeOn(Schedulers.newThread())
                 .subscribe(
                         stopMonitor -> {
-                            if (stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit == null) {
+                            if (stopMonitor.Siri.ServiceDelivery.
+                                    StopMonitoringDelivery[0].MonitoredStopVisit == null) {
                                 this.setLimitedTransitInfo(refNum);
                             } else {
                                 this.setCompleteStopInfo(refNum);
@@ -41,8 +43,10 @@ public class TransitController {
                 .subscribe(
                         stopMonitor -> {
                             {
-                                String responseTimestamp = stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].ResponseTimestamp;
-                                limitedInfo.setText("Detailed stop visit not available" + responseTimestamp);
+                                String responseTimestamp = stopMonitor.Siri.ServiceDelivery.
+                                        StopMonitoringDelivery[0].ResponseTimestamp;
+                                limitedInfo.setText("Detailed stop visit not available"
+                                        + responseTimestamp);
                             }
 
                         }, Throwable::printStackTrace);
