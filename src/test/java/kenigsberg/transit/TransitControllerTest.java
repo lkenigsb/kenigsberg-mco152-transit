@@ -3,10 +3,7 @@ package kenigsberg.transit;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.plugins.RxJavaPlugins;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import kenigsberg.transit.json.Distances;
-import kenigsberg.transit.json.Extensions;
-import kenigsberg.transit.json.MonitoredCall;
-import kenigsberg.transit.json.StopMonitor;
+import kenigsberg.transit.json.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -22,17 +19,15 @@ import java.util.Dictionary;
 
 class TransitControllerTest {
 
-
-
     @Test
     public void determineProvideInfo()
     {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JLabel completeStopInfo = mock();
+        JPanel detailedStopPanel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, completeStopInfo);
+        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
 
         StopMonitor stopMonitor = mock();
         Observable<StopMonitor> observable = Observable.just(stopMonitor);
@@ -52,9 +47,9 @@ class TransitControllerTest {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JLabel completeStopInfo = mock();
+        JPanel detailedStopPanel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, completeStopInfo);
+        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
 
         // when
         controller.setLimitedTransitInfo("00:00:00");
@@ -69,22 +64,25 @@ class TransitControllerTest {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JLabel completeStopInfo = mock();
+        JPanel detailedStopPanel = mock();
+        JLabel label = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, completeStopInfo);
+        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
 
-        MonitoredCall monitoredCall = new MonitoredCall();
-        String arrivalTime = monitoredCall.AimedArrivalTime = "00:00:00";
-        monitoredCall.Extensions = new Extensions();
-        monitoredCall.Extensions.Distances = new Distances();
-        String distance  = monitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
-        String nameStop = monitoredCall.StopPointName = "Testing Stop";
+        MonitoredStopVisit[] monitoredStopVisits = new MonitoredStopVisit[1];
+        //monitoredStopVisits[0].MonitoredVehicleJourney = new MonitoredVehicleJourney();
+        //monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall = new MonitoredCall();
+        String arrivalTime = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.AimedArrivalTime = "00:00:00";
+        monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions = new Extensions();
+        monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances = new Distances();
+        String distance  = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
+        String nameStop = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.StopPointName = "Testing Stop";
 
 
         // when
-        controller.setCompleteStopInfo(monitoredCall);
+        controller.setCompleteStopInfo(monitoredStopVisits);
 
         // then
-        verify(completeStopInfo).setText(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
+        verify(label).setText(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
     }
 }

@@ -20,11 +20,10 @@ public class TransitFrame extends JFrame {
     private TransitService service = retrofit.create(TransitService.class);
 
     private JLabel limitedInfoLabel;
-    private JLabel completeStopInfo;
     private TransitController controller;
     public TransitFrame() {
 
-        setSize(800, 300);
+        setSize(800, 500);
         setTitle("NYC Transit");
         //What happens when we hit the exit button
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -33,38 +32,33 @@ public class TransitFrame extends JFrame {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-
-        JLabel title = new JLabel("NYC BUS TRANSIT", SwingConstants.CENTER);
-        title.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-        title.setForeground(Color.BLACK);
-        mainPanel.add(title, BorderLayout.NORTH);
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
 
         JPanel stopPanel = new JPanel();
         stopPanel.setLayout(new BorderLayout());
 
-        JTextField refNumber = new JTextField("Stop Reference Number");
-        stopPanel.add(refNumber, BorderLayout.CENTER);
+        JTextField refNumber = new JTextField("Please Enter Stop Reference Number");
+        stopPanel.add(refNumber, BorderLayout.NORTH);
 
         JButton provideStopInfo = new JButton("Provide Stop Info");
         stopPanel.add(provideStopInfo, BorderLayout.EAST);
 
+        topPanel.add(stopPanel, BorderLayout.CENTER);
+
         JPanel detailStopPanel = new JPanel();
-        detailStopPanel.setLayout(new FlowLayout());
+        detailStopPanel.setLayout(new BoxLayout(detailStopPanel, BoxLayout.Y_AXIS));
 
         limitedInfoLabel = new JLabel();
         limitedInfoLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
-        limitedInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 
-        completeStopInfo = new JLabel();
-        detailStopPanel.add(completeStopInfo);
+        controller = new TransitController(service, limitedInfoLabel, detailStopPanel);
 
-        controller = new TransitController(service, limitedInfoLabel, completeStopInfo);
-
-        stopPanel.add(detailStopPanel, BorderLayout.SOUTH);
-        mainPanel.add(stopPanel, BorderLayout.CENTER);
+        mainPanel.add(detailStopPanel, BorderLayout.CENTER);
+        mainPanel.add(topPanel,BorderLayout.NORTH);
         setContentPane(mainPanel);
 
         provideStopInfo.addActionListener(new ActionListener() {

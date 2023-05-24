@@ -27,6 +27,5 @@ class TransitServiceTest {
         Assertions.assertNotNull(stopMonitor);
         Assertions.assertNotNull(stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].ResponseTimestamp);
         Assertions.assertNotNull(stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.DestinationName);
-        //Assertions.assertEquals("S GANNON AV/BRADLEY AV", stopMonitor.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.StopPointName);
     }
 }
