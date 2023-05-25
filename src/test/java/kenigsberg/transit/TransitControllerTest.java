@@ -64,7 +64,7 @@ class TransitControllerTest {
         JLabel limitedInfo = mock();
         DefaultTableModel tableModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, tableModel);
+        final TransitController controller = new TransitController(service, limitedInfo, tableModel);
 
         MonitoredStopVisit[] monitoredStopVisits = new MonitoredStopVisit[1];
         monitoredStopVisits[0] = new MonitoredStopVisit();

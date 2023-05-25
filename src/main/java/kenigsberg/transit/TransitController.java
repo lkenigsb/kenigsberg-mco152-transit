@@ -20,7 +20,8 @@ public class TransitController {
 
 
 
-    public TransitController(TransitService service, JLabel limitedInfo, DefaultTableModel tableModel) {
+    public TransitController(TransitService service, JLabel limitedInfo,
+                             DefaultTableModel tableModel) {
         this.service = service;
         this.limitedInfo = limitedInfo;
         this.tableModel = tableModel;

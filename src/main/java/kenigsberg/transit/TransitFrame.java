@@ -58,7 +58,7 @@ public class TransitFrame extends JFrame {
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
 
-        String columnNames[]={"Stop Name","Arrival Time","Distance"};
+        String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
 
         DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
 
