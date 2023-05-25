@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -24,9 +25,9 @@ class TransitControllerTest {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        DefaultListModel listModel = mock();
+        DefaultTableModel tableModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, listModel);
+        TransitController controller = new TransitController(service, limitedInfo, tableModel);
 
         StopMonitor stopMonitor = mock();
         Observable<StopMonitor> observable = Observable.just(stopMonitor);
@@ -45,9 +46,9 @@ class TransitControllerTest {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        DefaultListModel listModel = mock();
+        DefaultTableModel tableModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, listModel);
+        TransitController controller = new TransitController(service, limitedInfo, tableModel);
 
         // when
         controller.setLimitedTransitInfo("00:00:00");
@@ -61,9 +62,9 @@ class TransitControllerTest {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        DefaultListModel listModel = mock();
+        DefaultTableModel tableModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, listModel);
+        TransitController controller = new TransitController(service, limitedInfo, tableModel);
 
         MonitoredStopVisit[] monitoredStopVisits = new MonitoredStopVisit[1];
         monitoredStopVisits[0] = new MonitoredStopVisit();
@@ -78,8 +79,9 @@ class TransitControllerTest {
 
         // when
         controller.setCompleteStopInfo(monitoredStopVisits);
+        String[] row = {nameStop, arrivalTime, distance};
 
         // then
-        verify(listModel).addElement(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
+        verify(tableModel).addRow(row);
     }
 }

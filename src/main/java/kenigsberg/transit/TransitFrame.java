@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import javax.swing.*;
 import javax.swing.event.ListDataListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,21 +58,17 @@ public class TransitFrame extends JFrame {
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
 
+        String columnNames[]={"Stop Name","Arrival Time","Distance"};
 
-        DefaultListModel listModel = new DefaultListModel();
+        DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
 
-        JList list = new JList(listModel);
-
-        list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        list.setLayoutOrientation(JList.VERTICAL);
-        list.setVisibleRowCount(-1);
+        JTable table = new JTable(defaultTableModel);
 
 
-        controller = new TransitController(service, limitedInfoLabel, listModel);
+        controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
 
-        JScrollPane listScroller = new JScrollPane(list);
-        listScroller.setPreferredSize(new Dimension(250, 80));
-        detailStopPanel.add(list);
+
+        detailStopPanel.add(add(new JScrollPane(table)));
 
         mainPanel.add(detailStopPanel, BorderLayout.CENTER);
         mainPanel.add(topPanel, BorderLayout.NORTH);
