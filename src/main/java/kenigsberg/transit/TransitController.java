@@ -15,13 +15,13 @@ import java.awt.*;
 public class TransitController {
     private TransitService service;
     private JLabel limitedInfo;
-    private JLabel completeStopInfo;
-    private JPanel detailStopPanel;
+    private DefaultListModel listModel;
 
-    public TransitController(TransitService service, JLabel limitedInfo, JPanel detailStopPanel) {
+
+    public TransitController(TransitService service, JLabel limitedInfo, DefaultListModel listModel) {
         this.service = service;
         this.limitedInfo = limitedInfo;
-        this.detailStopPanel = detailStopPanel;
+        this.listModel = listModel;
     }
 
     public void determineProvideInfo(String refNum) {
@@ -49,26 +49,15 @@ public class TransitController {
     }
 
     public void setCompleteStopInfo(MonitoredStopVisit[] monitoredStopVisits) {
-
-        JLabel title = new JLabel("List of Stops:");
-        detailStopPanel.add(title, Component.CENTER_ALIGNMENT);
+        listModel.addElement("List of Stops:");
 
         for (int i = 0; i < monitoredStopVisits.length; i++) {
             String nameStop = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.StopPointName;
             String arrivalTime = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.AimedArrivalTime;
             String distance = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance;
 
-            detailStopPanel.add(new JLabel(" "), Component.CENTER_ALIGNMENT);
-            JLabel label = new JLabel();
-            label.setText(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
-            detailStopPanel.add(label, Component.CENTER_ALIGNMENT);
+            listModel.addElement(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
 
         }
-
-        /*String nameStop = monitoredCall.StopPointName;
-        String arrivalTime = monitoredCall.AimedArrivalTime;
-        String distance = monitoredCall.Extensions.Distances.PresentableDistance;
-        completeStopInfo.setText(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);*/
-
     }
 }

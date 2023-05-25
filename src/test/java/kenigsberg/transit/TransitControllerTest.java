@@ -20,14 +20,13 @@ import java.util.Dictionary;
 class TransitControllerTest {
 
     @Test
-    public void determineProvideInfo()
-    {
+    public void determineProvideInfo() {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JPanel detailedStopPanel = mock();
+        DefaultListModel listModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
+        TransitController controller = new TransitController(service, limitedInfo, listModel);
 
         StopMonitor stopMonitor = mock();
         Observable<StopMonitor> observable = Observable.just(stopMonitor);
@@ -42,14 +41,13 @@ class TransitControllerTest {
     }
 
     @Test
-    public void setLimitedTransitInfo()
-    {
+    public void setLimitedTransitInfo() {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JPanel detailedStopPanel = mock();
+        DefaultListModel listModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
+        TransitController controller = new TransitController(service, limitedInfo, listModel);
 
         // when
         controller.setLimitedTransitInfo("00:00:00");
@@ -59,23 +57,22 @@ class TransitControllerTest {
     }
 
     @Test
-    public void setCompleteStopInfo()
-    {
+    public void setCompleteStopInfo() {
         // given
         TransitService service = mock();
         JLabel limitedInfo = mock();
-        JPanel detailedStopPanel = mock();
-        JLabel label = mock();
+        DefaultListModel listModel = mock();
 
-        TransitController controller = new TransitController(service, limitedInfo, detailedStopPanel);
+        TransitController controller = new TransitController(service, limitedInfo, listModel);
 
         MonitoredStopVisit[] monitoredStopVisits = new MonitoredStopVisit[1];
-        //monitoredStopVisits[0].MonitoredVehicleJourney = new MonitoredVehicleJourney();
-        //monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall = new MonitoredCall();
+        monitoredStopVisits[0] = new MonitoredStopVisit();
+        monitoredStopVisits[0].MonitoredVehicleJourney = new MonitoredVehicleJourney();
+        monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall = new MonitoredCall();
         String arrivalTime = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.AimedArrivalTime = "00:00:00";
         monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions = new Extensions();
         monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances = new Distances();
-        String distance  = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
+        String distance = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
         String nameStop = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.StopPointName = "Testing Stop";
 
 
@@ -83,6 +80,6 @@ class TransitControllerTest {
         controller.setCompleteStopInfo(monitoredStopVisits);
 
         // then
-        verify(label).setText(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
+        verify(listModel).addElement(nameStop + " Arrival Time: " + arrivalTime + " Distance: " + distance);
     }
 }

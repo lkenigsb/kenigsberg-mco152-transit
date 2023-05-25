@@ -5,6 +5,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import javax.swing.*;
+import javax.swing.event.ListDataListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,8 @@ public class TransitFrame extends JFrame {
 
     private JLabel limitedInfoLabel;
     private TransitController controller;
+    String[] listContent = new String[20];
+
     public TransitFrame() {
 
         setSize(800, 500);
@@ -55,10 +58,23 @@ public class TransitFrame extends JFrame {
         detailStopPanel.add(limitedInfoLabel);
 
 
-        controller = new TransitController(service, limitedInfoLabel, detailStopPanel);
+        DefaultListModel listModel = new DefaultListModel();
+
+        JList list = new JList(listModel);
+
+        list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        list.setLayoutOrientation(JList.VERTICAL);
+        list.setVisibleRowCount(-1);
+
+
+        controller = new TransitController(service, limitedInfoLabel, listModel);
+
+        JScrollPane listScroller = new JScrollPane(list);
+        listScroller.setPreferredSize(new Dimension(250, 80));
+        detailStopPanel.add(list);
 
         mainPanel.add(detailStopPanel, BorderLayout.CENTER);
-        mainPanel.add(topPanel,BorderLayout.NORTH);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
         setContentPane(mainPanel);
 
         provideStopInfo.addActionListener(new ActionListener() {
