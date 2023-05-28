@@ -23,7 +23,6 @@ public class TransitFrame extends JFrame {
 
     private JLabel limitedInfoLabel;
     private TransitController controller;
-    String[] listContent = new String[20];
 
     public TransitFrame() {
 

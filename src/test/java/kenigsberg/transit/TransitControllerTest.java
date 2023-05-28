@@ -64,7 +64,8 @@ class TransitControllerTest {
         JLabel limitedInfo = mock();
         DefaultTableModel tableModel = mock();
 
-        final TransitController controller = new TransitController(service, limitedInfo, tableModel);
+        final TransitController controller = new
+                TransitController(service, limitedInfo, tableModel);
 
         MonitoredStopVisit[] monitoredStopVisits = new MonitoredStopVisit[1];
         monitoredStopVisits[0] = new MonitoredStopVisit();
@@ -73,7 +74,8 @@ class TransitControllerTest {
         String arrivalTime = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.AimedArrivalTime = "00:00:00";
         monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions = new Extensions();
         monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances = new Distances();
-        String distance = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
+        String distance = monitoredStopVisits[0].MonitoredVehicleJourney.
+                MonitoredCall.Extensions.Distances.PresentableDistance = "0.0 miles away";
         String nameStop = monitoredStopVisits[0].MonitoredVehicleJourney.MonitoredCall.StopPointName = "Testing Stop";
 
 
