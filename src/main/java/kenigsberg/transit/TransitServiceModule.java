@@ -35,7 +35,7 @@ public class TransitServiceModule {
     }
 
     @Provides
-    @Named("tableModel")
+    @Named("defaultTableModel")
     @Singleton
     public DefaultTableModel providesTableModel()
     {

@@ -24,10 +24,10 @@ public class TransitController {
     @Inject
     public TransitController(TransitService service,
                              @Named("limitedInfo") JLabel limitedInfo,
-                             @Named("tableModel") DefaultTableModel tableModel) {
+                             @Named("defaultTableModel") DefaultTableModel defaultTableModel) {
         this.service = service;
         this.limitedInfo = limitedInfo;
-        this.tableModel = tableModel;
+        this.tableModel = defaultTableModel;
     }
 
     public void determineProvideInfo(String refNum) {
