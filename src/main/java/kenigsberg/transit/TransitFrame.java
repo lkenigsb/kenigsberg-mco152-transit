@@ -12,6 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
 public class TransitFrame extends JFrame {
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://bustime.mta.info/")
@@ -25,6 +29,7 @@ public class TransitFrame extends JFrame {
     private JLabel limitedInfoLabel;
     private TransitController controller;
 
+    @Inject
     public TransitFrame() {
 
         setSize(800, 600);

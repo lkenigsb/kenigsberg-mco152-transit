@@ -1,5 +1,6 @@
 package kenigsberg.transit;
 
+import dagger.Module;
 import io.reactivex.rxjava3.core.Observable;
 import kenigsberg.transit.json.StopMonitor;
 import retrofit2.http.GET;

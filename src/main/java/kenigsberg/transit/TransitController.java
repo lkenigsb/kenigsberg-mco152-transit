@@ -2,6 +2,7 @@ package kenigsberg.transit;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+import javax.inject.Inject;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,7 @@ public class TransitController {
     private DefaultTableModel tableModel;
 
 
+    @Inject
     public TransitController(TransitService service, JLabel limitedInfo,
                              DefaultTableModel tableModel) {
         this.service = service;
