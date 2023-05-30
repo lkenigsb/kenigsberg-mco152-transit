@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 @Module
 public class TransitServiceModule {
@@ -36,8 +37,10 @@ public class TransitServiceModule {
     @Provides
     @Named("tableModel")
     @Singleton
-    public JLabel providesTableModel()
+    public DefaultTableModel providesTableModel()
     {
-        return new JLabel();
+        //String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
+        //return new DefaultTableModel(columnNames, 0);
+        return new DefaultTableModel();
     }
 }

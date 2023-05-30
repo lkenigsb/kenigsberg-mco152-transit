@@ -75,10 +75,6 @@ public class TransitFrame extends JFrame {
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
 
-        String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
-
-        defaultTableModel = new DefaultTableModel(columnNames, 0);
-
         JButton stopReferenceButton = new JButton();
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
