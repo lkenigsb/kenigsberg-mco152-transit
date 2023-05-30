@@ -64,13 +64,13 @@ public class TransitFrame extends JFrame {
 
         DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
 
-        JTable table = new JTable(defaultTableModel);
-
         JButton stopReferenceButton = new JButton();
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
 
         controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
+
+        JTable table = new JTable(defaultTableModel);
 
         detailStopPanel.add(add(new JScrollPane(table)));
         mainPanel.add(stopReferenceButton, BorderLayout.EAST);
