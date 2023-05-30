@@ -6,8 +6,12 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import javax.inject.Named;
+import javax.inject.Singleton;
+import javax.swing.*;
+
 @Module
-public class TranitServiceModule {
+public class TransitServiceModule {
 
     @Provides
     public TransitService providesTransitService() {
@@ -19,5 +23,21 @@ public class TranitServiceModule {
 
         TransitService service = retrofit.create(TransitService.class);
         return service;
+    }
+
+    @Provides
+    @Named("limitedInfo")
+    @Singleton
+    public JLabel providesLimitedInfo()
+    {
+        return new JLabel();
+    }
+
+    @Provides
+    @Named("tableModel")
+    @Singleton
+    public JLabel providesTableModel()
+    {
+        return new JLabel();
     }
 }

@@ -4,10 +4,9 @@ import dagger.Component;
 
 import javax.inject.Singleton;
 
+@Singleton
+@Component(modules = {TransitServiceModule.class})
 public interface TransitComponent {
-    @Singleton
-    @Component(modules = {TranitServiceModule.class})
-    public interface ForecastWeatherComponent {
-        TransitFrame providesTransitFrame();
-    }
+    TransitFrame providesTransitFrame();
 }
+

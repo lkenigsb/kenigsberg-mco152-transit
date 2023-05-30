@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
 
 import javax.inject.Inject;
@@ -26,7 +25,9 @@ public class TransitFrame extends JFrame {
 
     private TransitService service = retrofit.create(TransitService.class);
 
-    private JLabel limitedInfoLabel;
+    @Named("limitedInfoLabel") private JLabel limitedInfoLabel;
+
+    @Named("defaultTableModel") private DefaultTableModel defaultTableModel;
     private TransitController controller;
 
     @Inject
@@ -67,7 +68,7 @@ public class TransitFrame extends JFrame {
 
         String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
+        defaultTableModel = new DefaultTableModel(columnNames, 0);
 
         JButton stopReferenceButton = new JButton();
         stopReferenceButton.setText("Click here for stop reference numbers");
