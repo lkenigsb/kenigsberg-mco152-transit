@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 public class TransitFrame extends JFrame {
+
+    /*
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://bustime.mta.info/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -24,14 +26,21 @@ public class TransitFrame extends JFrame {
 
 
     private TransitService service = retrofit.create(TransitService.class);
-
-    @Named("limitedInfoLabel") private JLabel limitedInfoLabel;
-
-    @Named("defaultTableModel") private DefaultTableModel defaultTableModel;
+*/
     private TransitController controller;
+    private JLabel limitedInfoLabel;
+
+    private DefaultTableModel defaultTableModel;
+
 
     @Inject
-    public TransitFrame() {
+    public TransitFrame(TransitController controller,
+                        @Named("limitedInfoLabel") JLabel limitedInfoLabel,
+                        @Named("defaultTableModel") DefaultTableModel defaultTableModel) {
+
+        this.controller = controller;
+        this.limitedInfoLabel = limitedInfoLabel;
+        this.defaultTableModel = defaultTableModel;
 
         setSize(800, 600);
         setTitle("NYC Transit");
@@ -74,7 +83,7 @@ public class TransitFrame extends JFrame {
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
 
-        controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
+        //controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
 
         JTable table = new JTable(defaultTableModel);
 
