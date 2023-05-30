@@ -39,8 +39,7 @@ public class TransitServiceModule {
     @Singleton
     public DefaultTableModel providesTableModel()
     {
-        //String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
-        //return new DefaultTableModel(columnNames, 0);
-        return new DefaultTableModel();
+        String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
+        return new DefaultTableModel(columnNames, 0);
     }
 }
