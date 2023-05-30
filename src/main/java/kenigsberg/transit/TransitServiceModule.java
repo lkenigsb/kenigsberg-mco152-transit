@@ -29,16 +29,14 @@ public class TransitServiceModule {
     @Provides
     @Named("limitedInfo")
     @Singleton
-    public JLabel providesLimitedInfo()
-    {
+    public JLabel providesLimitedInfo() {
         return new JLabel();
     }
 
     @Provides
     @Named("defaultTableModel")
     @Singleton
-    public DefaultTableModel providesTableModel()
-    {
+    public DefaultTableModel providesTableModel() {
         String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
         return new DefaultTableModel(columnNames, 0);
     }

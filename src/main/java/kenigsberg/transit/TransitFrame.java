@@ -35,7 +35,7 @@ public class TransitFrame extends JFrame {
 
     @Inject
     public TransitFrame(TransitController controller,
-                        @Named("limitedInfoLabel") JLabel limitedInfoLabel,
+                        @Named("limitedInfo") JLabel limitedInfoLabel,
                         @Named("defaultTableModel") DefaultTableModel defaultTableModel) {
 
         this.controller = controller;
@@ -70,7 +70,6 @@ public class TransitFrame extends JFrame {
         JPanel detailStopPanel = new JPanel();
         detailStopPanel.setLayout(new BoxLayout(detailStopPanel, BoxLayout.Y_AXIS));
 
-        limitedInfoLabel = new JLabel();
         limitedInfoLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
@@ -79,7 +78,6 @@ public class TransitFrame extends JFrame {
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
 
-        //controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
 
         JTable table = new JTable(defaultTableModel);
 
