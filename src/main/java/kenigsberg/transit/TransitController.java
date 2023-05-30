@@ -2,6 +2,8 @@ package kenigsberg.transit;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,11 +21,13 @@ public class TransitController {
     private DefaultTableModel tableModel;
 
 
-    public TransitController(TransitService service, JLabel limitedInfo,
-                             DefaultTableModel tableModel) {
+    @Inject
+    public TransitController(TransitService service,
+                             @Named("limitedInfo") JLabel limitedInfo,
+                             @Named("defaultTableModel") DefaultTableModel defaultTableModel) {
         this.service = service;
         this.limitedInfo = limitedInfo;
-        this.tableModel = tableModel;
+        this.tableModel = defaultTableModel;
     }
 
     public void determineProvideInfo(String refNum) {

@@ -10,9 +10,14 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
+
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 public class TransitFrame extends JFrame {
+
+    /*
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("https://bustime.mta.info/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -21,11 +26,21 @@ public class TransitFrame extends JFrame {
 
 
     private TransitService service = retrofit.create(TransitService.class);
-
-    private JLabel limitedInfoLabel;
+*/
     private TransitController controller;
+    private JLabel limitedInfoLabel;
 
-    public TransitFrame() {
+    private DefaultTableModel defaultTableModel;
+
+
+    @Inject
+    public TransitFrame(TransitController controller,
+                        @Named("limitedInfo") JLabel limitedInfoLabel,
+                        @Named("defaultTableModel") DefaultTableModel defaultTableModel) {
+
+        this.controller = controller;
+        this.limitedInfoLabel = limitedInfoLabel;
+        this.defaultTableModel = defaultTableModel;
 
         setSize(800, 600);
         setTitle("NYC Transit");
@@ -55,20 +70,14 @@ public class TransitFrame extends JFrame {
         JPanel detailStopPanel = new JPanel();
         detailStopPanel.setLayout(new BoxLayout(detailStopPanel, BoxLayout.Y_AXIS));
 
-        limitedInfoLabel = new JLabel();
         limitedInfoLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
         limitedInfoLabel.setForeground(Color.LIGHT_GRAY);
         detailStopPanel.add(limitedInfoLabel);
-
-        String columnNames[] = {"Stop Name", "Arrival Time", "Distance"};
-
-        DefaultTableModel defaultTableModel = new DefaultTableModel(columnNames, 0);
 
         JButton stopReferenceButton = new JButton();
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
 
-        controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
 
         JTable table = new JTable(defaultTableModel);
 
