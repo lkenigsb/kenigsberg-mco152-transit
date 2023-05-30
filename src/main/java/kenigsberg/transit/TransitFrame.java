@@ -70,21 +70,7 @@ public class TransitFrame extends JFrame {
         stopReferenceButton.setText("Click here for stop reference numbers");
         stopReferenceButton.setPreferredSize(new Dimension(250, 10));
 
-        stopReferenceButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    java.awt.Desktop.getDesktop().browse(java.net.URI.create
-                            ("https://bustime.mta.info/m/index?q=SIM33C&l=&t="));
-                } catch (Exception exception) {
-                    System.out.println(exception.getMessage());
-                }
-            }
-        });
-
-
         controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
-
 
         detailStopPanel.add(add(new JScrollPane(table)));
         mainPanel.add(stopReferenceButton, BorderLayout.EAST);
@@ -96,6 +82,18 @@ public class TransitFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 controller.determineProvideInfo(refNumber.getText());
+            }
+        });
+
+        stopReferenceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(
+                            "https://bustime.mta.info/m/index?q=SIM33C&l=&t="));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
             }
         });
     }
