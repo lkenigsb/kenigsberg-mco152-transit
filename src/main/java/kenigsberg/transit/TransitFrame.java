@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class TransitFrame extends JFrame {
     private Retrofit retrofit = new Retrofit.Builder()
@@ -26,7 +27,7 @@ public class TransitFrame extends JFrame {
 
     public TransitFrame() {
 
-        setSize(800, 500);
+        setSize(800, 600);
         setTitle("NYC Transit");
         //What happens when we hit the exit button
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,6 +47,8 @@ public class TransitFrame extends JFrame {
 
         JButton provideStopInfo = new JButton("Provide Stop Info");
         stopPanel.add(provideStopInfo, BorderLayout.EAST);
+        provideStopInfo.setPreferredSize(new Dimension(250, 30));
+
 
         topPanel.add(stopPanel, BorderLayout.CENTER);
 
@@ -63,13 +66,29 @@ public class TransitFrame extends JFrame {
 
         JTable table = new JTable(defaultTableModel);
 
+        JButton stopReferenceButton = new JButton();
+        stopReferenceButton.setText("Click here for stop reference numbers");
+        stopReferenceButton.setPreferredSize(new Dimension(250, 10));
+
+        stopReferenceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    java.awt.Desktop.getDesktop().browse(java.net.URI.create
+                            ("https://bustime.mta.info/m/index?q=SIM33C&l=&t="));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+            }
+        });
+
 
         controller = new TransitController(service, limitedInfoLabel, defaultTableModel);
 
 
         detailStopPanel.add(add(new JScrollPane(table)));
-
-        mainPanel.add(detailStopPanel, BorderLayout.CENTER);
+        mainPanel.add(stopReferenceButton, BorderLayout.EAST);
+        mainPanel.add(detailStopPanel, BorderLayout.SOUTH);
         mainPanel.add(topPanel, BorderLayout.NORTH);
         setContentPane(mainPanel);
 

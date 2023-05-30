@@ -19,7 +19,6 @@ public class TransitController {
     private DefaultTableModel tableModel;
 
 
-
     public TransitController(TransitService service, JLabel limitedInfo,
                              DefaultTableModel tableModel) {
         this.service = service;
@@ -56,7 +55,8 @@ public class TransitController {
         for (int i = 0; i < monitoredStopVisits.length; i++) {
             String nameStop = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.StopPointName;
             String arrivalTime = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.AimedArrivalTime;
-            String distance = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance;
+            String distance = monitoredStopVisits[i].MonitoredVehicleJourney.MonitoredCall
+                    .Extensions.Distances.PresentableDistance;
 
             String[] row = {nameStop, arrivalTime, distance};
             tableModel.addRow(row);
